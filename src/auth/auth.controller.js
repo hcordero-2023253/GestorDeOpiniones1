@@ -35,6 +35,7 @@ export const login = async (req, res) => {
             ]
         })
 
+        
         if(user && await checkPassword(user.password, password)){
             let loggerUser={
                 uid: user._id,
@@ -50,6 +51,12 @@ export const login = async (req, res) => {
                 token
             })
         }
+        
+        return res.status(400).send({
+            success: false,
+            message: 'Debes ingresar usuario y contraseña',
+        })
+        
     } catch (error) {
         console.error(error);
         return res.status(500).send({

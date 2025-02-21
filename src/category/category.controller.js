@@ -1,4 +1,5 @@
 import Category from './category.model.js'
+import Publication from '../publications/publications.model.js'
 
 export const addCategory = async (req, res) => {
     try {
@@ -98,6 +99,10 @@ export const deleteCategory = async (req, res) => {
             success: false,
             message: 'Cannot delete default category',
         });
+
+        let defaultCategory = await Category.findOne({name: 'Default'});
+
+        await Publication.updateMany({category: id}, {category: defaultCategory._id});
         await Category.findByIdAndDelete(id)
 
         return res.send({

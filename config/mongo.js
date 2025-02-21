@@ -26,7 +26,7 @@ export const connect = async()=>{
             {
                 maxPoolSize: 50,
                 serverSelectionTimeoutMS: 5000
-            }
+            }//mongodb://127.0.0.1:27017/mydb
         )
     } catch (error) {
         console.log('data base error', error);

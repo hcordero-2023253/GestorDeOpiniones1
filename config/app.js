@@ -10,6 +10,7 @@ import { limiter } from '../middlewares/rate.limit.js'
 import authRotes from '../src/auth/auth.routes.js'
 import userRotes from '../src/user/user.routes.js'
 import categoryRotes from '../src/category/category.routes.js'
+import postRoutes from '../src/publications/publications.routes.js'
 
 const config = (app)=>{
     app.use(express.json());
@@ -24,6 +25,7 @@ const routes = (app)=>{
     app.use('/v1/auth',authRotes)
     app.use('/v1/user', userRotes)
     app.use('/v1/category', categoryRotes)
+    app.use('/v1/post', postRoutes)
 }
 
 export const initServer = ()=>{

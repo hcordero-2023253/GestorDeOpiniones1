@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import category from "../category/category.routes";
 
 const publicationsSchema = Schema({
     title:{
