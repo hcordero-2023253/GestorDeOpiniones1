@@ -54,7 +54,7 @@ export const login = async (req, res) => {
         
         return res.status(400).send({
             success: false,
-            message: 'Debes ingresar usuario y contraseña',
+            message: 'Incorrect password or userLoggin',
         })
         
     } catch (error) {

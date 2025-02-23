@@ -46,6 +46,15 @@ export const existPostcontent = async(content, publications)=>{
     }
 }
 
+//Validate comment
+export const existComment = async (content, comment) => {
+    const alreadyComment = await Comment.findOne({content: content });
+    if (alreadyComment && alreadyComment._id != comment._id) {
+        console.error(`Comment ${content} is already taken`);
+        throw new Error(`Comment ${content} is already taken`);
+    }
+}
+
 export const notRequiredFlied = async(field)=>{
     if(field){
         throw new Error(`${field} is not required`);

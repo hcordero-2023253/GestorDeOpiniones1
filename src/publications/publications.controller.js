@@ -1,6 +1,5 @@
 import Publications from './publications.model.js'
-import User from '../user/user.model.js'
-import Category from '../category/category.model.js'
+import Comment from '../comments/comments.model.js'
 
 export const addPost = async (req, res) => {
     try {
@@ -9,7 +8,7 @@ export const addPost = async (req, res) => {
         await post.save();
         return res.status(200).send({
             success: true,
-            message: "Post added successfully",
+            message: `Post ${post.title} added successfully`,
         })
     } catch (error) {
         console.error(error);
@@ -65,35 +64,64 @@ export const viewPostById = async (req, res) => {
     }
 }
 
-export const updatePost = async(req, res)=>{
+export const updatePost = async (req, res) => {
     try {
         let id = req.params.id;
-        let post = await Publications.findById(id)
-        if(post.user.toString()!== req.user.uid) return res.status(401).send({
-            success: false,
-            message: 'You are not the owner of this post'
-        })
+        let data = req.body;
+        let post = await Publications.findById(id).populate('user');
+
+        if (!post) {
+            return res.status(404).send({
+                success: false,
+                message: 'Post not found'
+            });
+        }
+
+        if (post.user._id.toString() !== req.user.uid){
+            return res.status(401).send({
+                success: false,
+                message: 'You are not the owner of this post'
+            });
+        }
+
+        let updatedPost = await Publications.findByIdAndUpdate(id, data, { new: true })
+            .populate('user')
+            .populate('category');
+
         return res.send({
             success: true,
-            message: `${post.title} post updated`, post
-        })
+            message: `${updatedPost.title} post updated`,
+            post: updatedPost
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send({
             success: false,
-            message: 'Not found Post ', error
+            message: 'Error updating post',
+            error
         });
     }
-}
+};
+
 
 export const deletePost = async(req, res)=>{
     try {
        let id = req.params.id;
-       let post = await Publications.findByIdAndDelete(id)
-        if(post.user.toString()!== req.user.uid) return res.status(401).send({
+       const post = await Publications.findById(id).populate('user');
+
+        if(!post)return res.status(404).send({
+            success: false,
+            message: 'Post not found'
+        });
+
+        if(post.user._id.toString()!== req.user.uid) return res.status(401).send({
             success: false,
             message: 'You are not the owner of this post'
         })
+
+        await Comment.deleteMany({post: id});
+        await Publications.findByIdAndDelete(id);
+
         return res.send({
             success: true,
             message: `${post.title} post deleted`

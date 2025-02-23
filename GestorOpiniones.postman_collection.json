@@ -1,0 +1,844 @@
+{
+	"info": {
+		"_postman_id": "24d363b9-7823-46e5-ab0a-6255ed3a9b68",
+		"name": "GestorOpiniones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37956978"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Registrar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Héctor Mauricio",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Cordero Oliva",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "hcordero",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "hcordero@kinal.edu.gt",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Hcordero132",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userLoggin",
+									"value": "hcordero",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Hcordero132",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "newUsername",
+									"value": "hcordero98011",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Hcordero98741",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "Hcordero987411",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/user/updateUser/67b79486e107097fb8641966",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"user",
+								"updateUser",
+								"67b79486e107097fb8641966"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "Paginacion de categoria",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3605/v1/category/?limit=1&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3605/v1/category/67b7ad957960c4e21671f60d",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"67b7ad957960c4e21671f60d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Categoria",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "El colesterol",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Comer demasiada grasa saturada o grasas trans",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/category/addCategory",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"addCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar categoria",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "La falta de oportunidad",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "la pérdida del empleo suele conducir a la inestabilidad financiera y puede tener graves efectos psicológicos, como estrés, ansiedad y una menor sensación de autoestima",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/category/updateCategory/67b7ad957960c4e21671f60d",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"updateCategory",
+								"67b7ad957960c4e21671f60d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3605/v1/category/deleteCategory/67b7ad017960c4e21671f60b",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"category",
+								"deleteCategory",
+								"67b7ad017960c4e21671f60b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Ver Comentarios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/comment/?post=67ba711e6291bf0debc01fb5&limit=2&skip=0",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"comment",
+								""
+							],
+							"query": [
+								{
+									"key": "post",
+									"value": "67ba711e6291bf0debc01fb5"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver ComentariosID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3605/v1/comment/67ba72d30d9223cd65b5bfb2",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"comment",
+								"67ba72d30d9223cd65b5bfb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Comentario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "Muy buena opinion ✔✔✔✔",
+									"type": "text"
+								},
+								{
+									"key": "post",
+									"value": "67ba711e6291bf0debc01fb5",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "67ba66bb8cc0f754840dde30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/comment/addComment",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"comment",
+								"addComment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Comentarios",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "Me parece que hay que mejorar en la forma de crianza",
+									"type": "text"
+								},
+								{
+									"key": "post",
+									"value": "67ba711e6291bf0debc01fb5",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "67ba66bb8cc0f754840dde30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/comment/updateComment/67ba72d30d9223cd65b5bfb2",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"comment",
+								"updateComment",
+								"67ba72d30d9223cd65b5bfb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Comentario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "content",
+									"value": "Muy buena opinion ✔",
+									"type": "text"
+								},
+								{
+									"key": "post",
+									"value": "67ba711e6291bf0debc01fb5",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "67ba66bb8cc0f754840dde30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/comment/delete/67ba75b7d1991eb153dcba64",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"comment",
+								"delete",
+								"67ba75b7d1991eb153dcba64"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Paginacion Post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Tengo dos compañeros gays",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Mis compañeros tienen un fetiche raro de fetiche de estarse agarrando las manos, los muy maricones, quines son? pues son nada mas y nada menos, que NERY y CHEPETO",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "67b79486e107097fb8641966",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67b7aa9d42970b51375d544a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/post/?limit=13&skip=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"post",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "13"
+								},
+								{
+									"key": "skip",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Tengo dos compañeros gays",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Mis compañeros tienen un fetiche raro de fetiche de estarse agarrando las manos, los muy maricones, quines son? pues son nada mas y nada menos, que NERY y CHEPETO",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "67b79486e107097fb8641966",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67b7aa9d42970b51375d544a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/post/?limit=13&skip=1",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"post",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "13"
+								},
+								{
+									"key": "skip",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "El sobre peso en Guatemala",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "El sobrepeso y la obesidad se definen como una acumulación anormal o excesiva de grasa que puede ser perjudicial para la salud (OMS). Esta enfermedad crónica representa un reto emergente para el gobierno, por ese motivo se trabajan estrategias para disminuir su incidencia en la población. \n\nLa obesidad puede acarrear otras enfermedades que son nocivas para el organismo. Es el primer paso para otras patologías como hipertensión arterial, diabetes tipo II, índices elevados de colesterol y triglicéridos, problemas osteoarticulares, riesgo de padecer cáncer, apnea del sueño y problemas cardiovasculares, depresión, ansiedad, entre otros.",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67ba6dd3ded527c0a1457cfa",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "67ba6ce7a26623d60810948b",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/post/addPost",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"post",
+								"addPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Actualizar El Post",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Un siclo interminable",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/post/updatePost/67ba81a7de94a33c20d4a8df",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"post",
+								"updatePost",
+								"67ba81a7de94a33c20d4a8df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Las uvas asesinas",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Las uvas quieren venganza",
+									"type": "text"
+								},
+								{
+									"key": "user",
+									"value": "67b79486e107097fb8641966",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67b7ad957960c4e21671f60d",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3605/v1/post/deletePost/67ba711e6291bf0debc01fb5",
+							"host": [
+								"localhost"
+							],
+							"port": "3605",
+							"path": [
+								"v1",
+								"post",
+								"deletePost",
+								"67ba711e6291bf0debc01fb5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

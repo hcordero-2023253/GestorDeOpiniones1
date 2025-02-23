@@ -7,7 +7,7 @@ export const addCategory = async (req, res) => {
         let category = new Category(data);
         await category.save();
         return res.status(201).send({
-            success: false,
+            success: true,
             message: `${category.name} created successfully`, category
         })
     } catch (error) {
